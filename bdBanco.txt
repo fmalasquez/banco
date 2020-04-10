@@ -1,0 +1,43 @@
+create database banco;
+use banco;
+
+create table movimiento (
+id_movimiento int primary key auto_increment,
+id_cliente int,
+nro_cuenta varchar(5),
+tipo_movi varchar(20),
+fecha_movi datetime default current_timestamp,
+monto numeric);
+
+insert into movimiento (id_movimiento, id_cliente,nro_cuenta,tipo_movi,monto) values  (1,1,'12345','EGR',20);
+
+create table cliente (
+id_cliente int primary key auto_increment,
+nomb_cliente varchar (30),
+saldo numeric,
+nro_cuenta varchar(5)
+);
+
+
+insert into cliente (nomb_cliente,saldo,nro_cuenta ) values ('kaka',1000,'10001');
+insert into cliente (nomb_cliente,saldo,nro_cuenta ) values ('Neymar',2000,'10002');
+insert into cliente (nomb_cliente,saldo,nro_cuenta ) values ('Pizarro',3000,'10003');
+insert into cliente (nomb_cliente,saldo,nro_cuenta ) values ('Gareca',4000,'10004');
+insert into cliente (nomb_cliente,saldo,nro_cuenta ) values ('Maradona',5000,'10005');
+insert into cliente (nomb_cliente,saldo,nro_cuenta ) values ('Pele',6000,'10006');
+
+
+select m.*,c.nomb_cliente from movimiento m , cliente c where c.id_cliente = m.id_cliente and id_movimiento;
+
+
+
+http://localhost:8080/api/v1/banco/realizarTransferencia
+{
+	"idCliente" : 4,
+	"idClienteOtro" : 2,
+	"nrCuenta" : "83844",
+	"nroCuentaOtro" : "13133",
+	"tipoMovi" : "EGR",
+	"monto" : 500
+}
+
